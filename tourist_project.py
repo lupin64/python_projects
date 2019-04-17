@@ -1,4 +1,4 @@
-#lists
+#lists and variables
 destinations = ["Paris, France", "Shanghai, China", "Los Angeles, USA", "São Paulo, Brazil", "Cairo, Egypt"]
 
 test_traveler = ['Erin Wilkes', 'Shanghai, China', ['historical site', 'art']]
@@ -7,8 +7,6 @@ test_traveler = ['Erin Wilkes', 'Shanghai, China', ['historical site', 'art']]
 attractions = []
 for destination in destinations:
     attractions.append([])
-
-#var1
 
 #functions
 def get_destination_index(destination):
@@ -27,6 +25,20 @@ def add_attraction(destination, attraction):
   except ValueError:
     return
 
+def find_attractions(destination, interests):
+  destination_index = get_destination_index(destination)
+  attractions_in_city = attractions[destination_index]
+  attractions_with_interest = []
+  
+  for attraction in attractions_in_city:
+    possible_attraction = attraction
+    attraction_tags = attraction[1]
+
+    for interest in interests:
+      if interest in attraction_tags:
+        attractions_with_interest.append(possible_attraction[0])
+  return attractions_with_interest
+
 #add attractions
 add_attraction("Los Angeles, USA", ['Venice Beach', ['beach']])
 add_attraction("Paris, France", ["the Louvre", ["art", "museum"]])
@@ -43,7 +55,11 @@ add_attraction("Cairo, Egypt", ["Egyptian Museum", ["museum"]])
 #var2
 test_destination_index = get_traveler_location(test_traveler)
 
+la_arts = find_attractions("Los Angeles, USA", ['art'])
+
 #print statements
 print(test_destination_index)
 
 print(attractions)
+
+print(la_arts)
